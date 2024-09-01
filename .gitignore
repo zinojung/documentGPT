@@ -2,3 +2,5 @@ env/
 .env
 test.py
 youtube.ipynb
+doc.ipynb
+.cache
