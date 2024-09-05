@@ -9,6 +9,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.memory import ConversationBufferMemory
 import streamlit as st
+import os
 
 st.set_page_config(
     page_title="DocumentGPT",
@@ -83,10 +84,17 @@ else:
 
     @st.cache_data(show_spinner="Embedding file...")
     def embed_file(file):
-        file_content = file.read()
-        file_path = f"./.cache/files/{file.name}"
+        # file_content = file.read()
+        # file_path = f"./.cache/files/{file.name}"
+
+        save_dir = "./.cache/files/"
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+
+        file_path = os.path.join(save_dir, file.name)
+
         with open(file_path, "wb") as f:
-            f.write(file_content)
+            f.write(file.getbuffer())
         cache_dir = LocalFileStore(f"./.cache/embeddings/{file.name}")
         splitter = CharacterTextSplitter.from_tiktoken_encoder(
             separator="\n",
