@@ -1,6 +1,6 @@
 env/
 .env
-test.py
-youtube.ipynb
+review.ipynb
 doc.ipynb
 .cache
+.streamlit
