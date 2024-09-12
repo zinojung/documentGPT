@@ -1,6 +1,12 @@
 env/
+files/
+ipynbs/
 .env
 review.ipynb
 doc.ipynb
 .cache
 .streamlit
+meeting_gpt.ipynb
+private_gpt.ipynb
+youtube.py
+

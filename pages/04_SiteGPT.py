@@ -196,13 +196,14 @@ else:
     retriever = load_website(url)
     query = st.text_input("Ask a question to the website.")
     if query:
-        chain = (
-            {
-                "docs": retriever,
-                "question": RunnablePassthrough(),
-            }
-            | RunnableLambda(get_answers)
-            | RunnableLambda(choose_answer)
-        )
-        result = chain.invoke(query)
-        st.markdown(result.content.replace("$", "\$"))
+        with st.spinner("Processing your query..."):
+            chain = (
+                {
+                    "docs": retriever,
+                    "question": RunnablePassthrough(),
+                }
+                | RunnableLambda(get_answers)
+                | RunnableLambda(choose_answer)
+            )
+            result = chain.invoke(query)
+            st.markdown(result.content.replace("$", "\$"))
